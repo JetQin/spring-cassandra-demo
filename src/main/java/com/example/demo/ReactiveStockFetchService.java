@@ -18,7 +18,6 @@ import org.springframework.util.MimeType;
 import org.springframework.web.reactive.function.client.ExchangeStrategies;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
-import reactor.core.Disposable;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
@@ -36,7 +35,7 @@ public class ReactiveStockFetchService {
 
 
     @Autowired
-    StockDailyRepository dailyRepository;
+    ReactiveStockDailyRepository dailyRepository;
 
 
     public Flux<List<StockDaily>> asyncFetchStockDaily(){
@@ -94,7 +93,7 @@ public class ReactiveStockFetchService {
             .subscribe(
                 item -> item.forEach(data -> {
                     data.setCreatedDate(LocalDate.now());
-                    log.info("retrieve stock {}, name {} ",data.getCode(), data.getName());
+                    log.info("retrieve stock {}, name {} ", data.getCode(), data.getName());
                     dailyRepository.save(data);
                 }),
                 error -> log.error("subscribe daily message error: {}", error)

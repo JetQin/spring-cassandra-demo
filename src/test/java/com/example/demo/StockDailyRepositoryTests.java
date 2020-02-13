@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import com.example.demo.config.CassandraConfig;
+import com.example.demo.repo.Ratio;
 import com.example.demo.repo.StockDaily;
 import com.example.demo.service.StockDailyRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +19,7 @@ import java.time.LocalDate;
 
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = CassandraConfig.class)
 class StockDailyRepositoryTests {
 
 	@Autowired
@@ -56,7 +58,8 @@ class StockDailyRepositoryTests {
 				new BigDecimal(3868508),
 				new BigDecimal(0.087285532329362),
 				new BigDecimal(4.46),
-				new BigDecimal(0.01793721973094)
+				new BigDecimal(0.01793721973094),
+				new Ratio(BigDecimal.ONE, BigDecimal.ONE)
 		);
 
 		repository.save(stock);

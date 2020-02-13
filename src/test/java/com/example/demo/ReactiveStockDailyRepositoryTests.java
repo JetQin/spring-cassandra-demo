@@ -1,17 +1,17 @@
 package com.example.demo;
 
+import com.example.demo.config.CassandraConfig;
+import com.example.demo.repo.Ratio;
 import com.example.demo.repo.StockDaily;
 import com.example.demo.service.ReactiveStockDailyRepository;
-import com.example.demo.service.StockDailyRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Assert;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
@@ -19,8 +19,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Slf4j
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = CassandraConfig.class)
 class ReactiveStockDailyRepositoryTests {
 
 	@Autowired
@@ -62,7 +62,8 @@ class ReactiveStockDailyRepositoryTests {
 				new BigDecimal(3868508),
 				new BigDecimal(0.087285532329362),
 				new BigDecimal(4.46),
-				new BigDecimal(0.01793721973094)
+				new BigDecimal(0.01793721973094),
+				new Ratio(BigDecimal.ONE, BigDecimal.ONE)
 		);
 
 

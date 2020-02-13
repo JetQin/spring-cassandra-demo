@@ -1,6 +1,7 @@
 package com.example.demo.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.cassandra.ReactiveSession;
 import org.springframework.data.cassandra.config.CassandraClusterFactoryBean;
@@ -17,9 +18,12 @@ import org.springframework.data.cassandra.core.mapping.CassandraMappingContext;
 import org.springframework.data.cassandra.core.mapping.SimpleTupleTypeFactory;
 import org.springframework.data.cassandra.core.mapping.SimpleUserTypeResolver;
 import org.springframework.data.cassandra.repository.config.EnableCassandraRepositories;
+import org.springframework.data.cassandra.repository.config.EnableReactiveCassandraRepositories;
 
 @Configuration
+@ComponentScan("com.example.demo.service")
 @EnableCassandraRepositories(basePackages = { "com.example.demo.service" })
+@EnableReactiveCassandraRepositories(basePackages = { "com.example.demo.service" })
 public class CassandraConfig {
 
     @Bean
